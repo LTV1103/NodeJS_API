@@ -18,16 +18,16 @@ const mysql = require("mysql2/promise");
 // });
 
 // module.exports = connection;
-
+const MYSQL_URL =
+  "mysql -h turntable.proxy.rlwy.net -u root -p ntMHpXvdvBbzLLyPxptihIArpcCHIPaw --port 42986 --protocol=TCP railway";
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "ql_suckhoe",
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-
+  uri: process.env.MYSQL_URL, // Biến môi trường MYSQL_URL từ Railway
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "ql_suckhoe",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 module.exports = pool; // Xuất pool hỗ trợ Promise
-
