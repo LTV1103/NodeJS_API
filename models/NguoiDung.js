@@ -80,7 +80,7 @@ class NguoiDung {
       throw new Error("TAI KHOAN HOAC MAT KHAU KHONG DUNG");
     }
 
-    return { id: user.id, hoTen: user.hoTen, email: user.email };
+    return { id: user.ma_nguoi_dung, email: user.email };
   };
 }
 module.exports = NguoiDung;
