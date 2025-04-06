@@ -92,13 +92,27 @@ const REGEISTER = async (req, res) => {
 const LOGIN = async (req, res) => {
   try {
     const { email, mat_khau } = req.body;
+
+    // Kiểm tra đầu vào
     if (!email || !mat_khau) {
-      return res.status(400).json({ message: "SAI TAI KHOAN HOAC MAT KHAU" });
+      return res.status(400).json({ message: "Email và mật khẩu là bắt buộc" });
     }
+
+    // Gọi hàm login từ model
     const user = await ND.login(email, mat_khau);
-    res.status(201).json({ message: "DANG NHAP THANH CONG", user });
+
+    // Trả kết quả thành công
+    res.status(200).json({
+      message: "Đăng nhập thành công",
+      user
+    });
   } catch (error) {
-    res.status(500).json({ message: "LOI", error: error.message });
+    // Trả lỗi rõ hơn cho người dùng
+    res.status(401).json({
+      message: "Đăng nhập thất bại",
+      error: error.message
+    });
   }
 };
+
 module.exports = { GETALL, REGEISTER, LOGIN, DELETE, UPDATE, GETUSERBYID };
