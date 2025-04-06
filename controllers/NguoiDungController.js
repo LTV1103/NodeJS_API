@@ -1,44 +1,80 @@
 const ND = require("../models/NguoiDung");
 
 const GETALL = async (req, res) => {
-  const getallND = await ND.getall();
-  res.json(getallND);
+  try {
+    const getallND = await ND.getall();
+    return res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Danh sách người dùng",
+        data: getallND,
+      });
+  } catch (error) {
+    console.error("Lỗi Server:", error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
+  }
 };
+
 const GETUSERBYID = async (req, res) => {
   const ma = req.params.ma;
-  const kq = await ND.getuserbyid(ma);
-  if (!kq) {
-    return res.status(404).json({ message: "KHONG TIM THAY MA NGUOI DUNG " });
+  try {
+    const kq = await ND.getuserbyid(ma);
+    if (!kq) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "KHÔNG TÌM THẤY MÃ NGƯỜI DÙNG" });
+    }
+    return res
+      .status(200)
+      .json({ status: "success", message: "THÔNG TIN NGƯỜI DÙNG", data: kq });
+  } catch (error) {
+    console.error("Lỗi Server:", error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
-  return res.status(200).json({ message: "THONG TIN NGUOI DUNG", kq });
 };
+
 const DELETE = async (req, res) => {
   try {
     const ma = req.params.ma;
     if (!ma) {
-      return res.status(400).json({ message: "MA BI LOI" });
+      return res.status(400).json({ status: "error", message: "MÃ BỊ LỖI" });
     }
     const kq = await ND.deleteuser(ma);
     if (kq) {
-      return res.status(200).json({ message: "DA XOA NGUOI DUNG THANH CONG" });
+      return res
+        .status(200)
+        .json({ status: "success", message: "ĐÃ XÓA NGƯỜI DÙNG THÀNH CÔNG" });
     } else {
-      return res.status(404).json({ message: "KHONG TIM THAY NGUOI DUNG" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "KHÔNG TÌM THẤY NGƯỜI DÙNG" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Loi Sever" });
+    console.error("Lỗi Server:", error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
+
 const UPDATE = async (req, res) => {
   try {
     const { ho_ten, gioi_tinh, ngay_sinh, so_dien_thoai } = req.body;
     const { ma } = req.params;
     if (!ma) {
-      return res.status(400).json({ message: "Thiếu mã người dùng" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Thiếu mã người dùng" });
     }
     if (!ho_ten || !gioi_tinh || !ngay_sinh || !so_dien_thoai) {
       return res
         .status(400)
-        .json({ message: "Vui lòng nhập đầy đủ thông tin" });
+        .json({ status: "error", message: "Vui lòng nhập đầy đủ thông tin" });
     }
     const kq = await ND.updateuser(
       ho_ten,
@@ -48,14 +84,19 @@ const UPDATE = async (req, res) => {
       ma
     );
     if (kq) {
-      return res.status(200).json({ message: "Cập nhật thành công" });
+      return res
+        .status(200)
+        .json({ status: "success", message: "Cập nhật thành công" });
     } else {
-      return res.status(404).json({ message: "Không tìm thấy người dùng" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy người dùng" });
     }
   } catch (error) {
+    console.error("Lỗi Server:", error);
     return res
       .status(500)
-      .json({ message: "Lỗi server", error: error.message });
+      .json({ status: "error", message: "Lỗi server", error: error.message });
   }
 };
 
@@ -73,7 +114,7 @@ const REGEISTER = async (req, res) => {
     ) {
       return res
         .status(400)
-        .json({ message: "VUI LONG NHAP DAY DU THONG TIN" });
+        .json({ status: "error", message: "VUI LÒNG NHẬP ĐẦY ĐỦ THÔNG TIN" });
     }
     const user = await ND.regeister(
       ho_ten,
@@ -83,9 +124,14 @@ const REGEISTER = async (req, res) => {
       ngay_sinh,
       so_dien_thoai
     );
-    res.status(201).json({ message: "DANG KY THANH CONG", user });
+    return res
+      .status(201)
+      .json({ status: "success", message: "ĐĂNG KÝ THÀNH CÔNG", data: user });
   } catch (error) {
-    res.status(500).json({ message: "LOI", error: error.message });
+    console.error("Lỗi Server:", error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi", error: error.message });
   }
 };
 
@@ -93,24 +139,25 @@ const LOGIN = async (req, res) => {
   try {
     const { email, mat_khau } = req.body;
 
-    // Kiểm tra đầu vào
     if (!email || !mat_khau) {
-      return res.status(400).json({ message: "Email và mật khẩu là bắt buộc" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Email và mật khẩu là bắt buộc" });
     }
 
-    // Gọi hàm login từ model
     const user = await ND.login(email, mat_khau);
 
-    // Trả kết quả thành công
-    res.status(200).json({
+    return res.status(200).json({
+      status: "success",
       message: "Đăng nhập thành công",
-      user
+      data: user,
     });
   } catch (error) {
-    // Trả lỗi rõ hơn cho người dùng
-    res.status(401).json({
+    console.error("Lỗi Server:", error);
+    return res.status(401).json({
+      status: "error",
       message: "Đăng nhập thất bại",
-      error: error.message
+      error: error.message,
     });
   }
 };

@@ -42,4 +42,5 @@ router.delete("/xoa/:maLuongNuoc", LuongNuocController.deleteWater);
 router.get("/ghichep/:ma", GhiChepController.GETGCBYIDUSER);
 router.get("/ghichep/chitiet/:ma", GhiChepController.GETGCBYIDUSER);
 router.delete("/ghichep/:ma", GhiChepController.DELETE);
+router.post("/ghichep", GhiChepController.THEMGC);
 module.exports = router;
