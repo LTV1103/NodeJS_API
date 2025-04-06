@@ -74,7 +74,7 @@ class NguoiDung {
     if (result.length == 0) {
       throw new Error("EMAIL KHONG TON TAI");
     }
-    const user = rows[0];
+    const user = result[0];
     const isMatch = await bcrypt.compare(mat_khau, user.mat_khau);
     if (!isMatch) {
       throw new Error("TAI KHOAN HOAC MAT KHAU KHONG DUNG");
