@@ -61,13 +61,28 @@ const UPDATE = async (req, res) => {
 
 const REGEISTER = async (req, res) => {
   try {
-    const { ho_ten, email, mat_khau, gioi_tinh } = req.body;
-    if (!ho_ten || !email || !mat_khau || !gioi_tinh) {
+    const { ho_ten, email, mat_khau, gioi_tinh, ngay_sinh, so_dien_thoai } =
+      req.body;
+    if (
+      !ho_ten ||
+      !email ||
+      !mat_khau ||
+      !gioi_tinh ||
+      !ngay_sinh ||
+      !so_dien_thoai
+    ) {
       return res
         .status(400)
         .json({ message: "VUI LONG NHAP DAY DU THONG TIN" });
     }
-    const user = await ND.regeister(ho_ten, email, mat_khau, gioi_tinh);
+    const user = await ND.regeister(
+      ho_ten,
+      email,
+      mat_khau,
+      gioi_tinh,
+      ngay_sinh,
+      so_dien_thoai
+    );
     res.status(201).json({ message: "DANG KY THANH CONG", user });
   } catch (error) {
     res.status(500).json({ message: "LOI", error: error.message });
