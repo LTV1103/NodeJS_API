@@ -26,7 +26,13 @@ const ADDUT = async (req, res) => {
     ngayBatDau,
     ngayKetThuc,
   } = req.body;
-  if (!maNguoiDung || !tenThuoc || !thoiGianNhac || !ngayBatDau) {
+  if (
+    !maNguoiDung ||
+    !tenThuoc ||
+    !thoiGianNhac ||
+    !ngayBatDau ||
+    !ngayKetThuc
+  ) {
     return res
       .status(400)
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
