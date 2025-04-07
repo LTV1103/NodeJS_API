@@ -26,20 +26,20 @@ router.get("/chiso/:ma", ChiSoController.GETCHISOBYIDUSER);
 router.get("/chiso/chitiet/:ma", ChiSoController.GETCHITIETCS);
 router.post("/chiso/:ma", ChiSoController.THEMCSBYND);
 router.put("/chiso/:ma", ChiSoController.UPDATEBYUSER);
-router.delete("/chiso/:ma", ChiSoController.DELETECSBYND);
+router.delete("/chiso/:ma", ChiSoController.DELETE);
 
 //Nhat Ky
 router.get("/nhatky/:ma", NhatKyController.HOATDONG);
 router.post("/nhatky/:ma", NhatKyController.THEMHOATDONG);
-router.put("/nhatky/:ma", NhatKyController.CAPNHATHOATDONG);
+router.put("/nhatky/:ma", NhatKyController.UPDATE);
 router.delete("/nhatky/:ma", NhatKyController.DELETE);
 router.get("/nhatky/chitiet/:ma", NhatKyController.DETAIL);
 
 //Uong Nuoc
-router.get("/tong/:ma/:ngay", LuongNuocController.getTotalWater);
-router.post("/them", LuongNuocController.addWater);
-router.put("/capnhat", LuongNuocController.updateWater);
-router.delete("/xoa/:maLuongNuoc", LuongNuocController.deleteWater);
+router.get("/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
+router.post("/them", LuongNuocController.ADD);
+router.put("/capnhat", LuongNuocController.UPDATE);
+router.delete("/xoa/:maLuongNuoc", LuongNuocController.DELETE);
 
 //Ghi Chep
 router.get("/ghichep/:ma", GhiChepController.GETGCBYIDUSER);

@@ -1,5 +1,5 @@
 const LN = require("../models/LuongNuoc");
-const getTotalWater = async (req, res) => {
+const GETTOTAL = async (req, res) => {
   const { ma, ngay } = req.params;
   try {
     const totalWater = await LN.getTotalWaterByUser(ma, ngay);
@@ -10,7 +10,7 @@ const getTotalWater = async (req, res) => {
   }
 };
 
-const addWater = async (req, res) => {
+const ADD = async (req, res) => {
   const { maNguoiDung, luongML, thoiGianGhi } = req.body;
   if (!maNguoiDung || !luongML || !thoiGianGhi) {
     return res.status(400).json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
@@ -24,7 +24,7 @@ const addWater = async (req, res) => {
   }
 };
 
-const updateWater = async (req, res) => {
+const UPDATE = async (req, res) => {
   const { maLuongNuoc, luongML, thoiGianGhi } = req.body;
   if (!maLuongNuoc || !luongML || !thoiGianGhi) {
     return res.status(400).json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
@@ -38,7 +38,7 @@ const updateWater = async (req, res) => {
   }
 };
 
-const deleteWater = async (req, res) => {
+const DELETE = async (req, res) => {
   const { maLuongNuoc } = req.params;
   if (!maLuongNuoc) {
     return res.status(400).json({ status: "error", message: "Thiếu mã lượng nước" });
@@ -53,8 +53,8 @@ const deleteWater = async (req, res) => {
 };
 
 module.exports = {
-  getTotalWater,
-  addWater,
-  updateWater,
-  deleteWater,
+  GETTOTAL,
+  ADD,
+  UPDATE,
+  DELETE,
 };

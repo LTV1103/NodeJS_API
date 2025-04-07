@@ -113,7 +113,7 @@ const UPDATEBYUSER = async (req, res) => {
         .json({ status: "error", message: "Vui Long Nhap Du Thong Tin" });
     }
     const bmi = can_nang / ((chieu_cao / 100) * (chieu_cao / 100));
-    const kq = await CS.updatechisobynguoidung(
+    const kq = await CS.updatechisobyid(
       ma,
       chieu_cao,
       can_nang,
