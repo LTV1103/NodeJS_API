@@ -3,13 +3,11 @@ const GETTOTAL = async (req, res) => {
   const { ma, ngay } = req.params;
   try {
     const totalWater = await LN.getTotalWaterByUser(ma, ngay);
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Tổng lượng nước đã uống",
-        totalWater,
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Tổng lượng nước đã uống",
+      totalWater,
+    });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
@@ -27,13 +25,11 @@ const ADD = async (req, res) => {
   }
   try {
     const result = await LN.addWaterRecord(maNguoiDung, luongML, thoiGianGhi);
-    return res
-      .status(201)
-      .json({
-        status: "success",
-        message: "Thêm lượng nước thành công",
-        data: result,
-      });
+    return res.status(201).json({
+      status: "success",
+      message: "Thêm lượng nước thành công",
+      data: result,
+    });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
@@ -55,13 +51,11 @@ const UPDATE = async (req, res) => {
       luongML,
       thoiGianGhi
     );
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Cập nhật thành công",
-        data: result,
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Cập nhật thành công",
+      data: result,
+    });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
@@ -90,16 +84,14 @@ const DELETE = async (req, res) => {
   }
 };
 const GETALL = async (req, res) => {
-  const { ma } = req.params;
+  const { ma } = req.params.ma;
   try {
     const result = await LN.getall(ma);
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Danh sách lượng nước",
-        data: result,
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Danh sách lượng nước",
+      data: result,
+    });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
