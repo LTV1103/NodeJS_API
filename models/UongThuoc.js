@@ -29,7 +29,7 @@ class UongThuoc {
     return result;
   }
 
-  static async suaUT(
+  static suaUT = async (
     maNguoiDung,
     tenThuoc,
     lieuLuong,
@@ -37,7 +37,7 @@ class UongThuoc {
     ngayBatDau,
     ngayKetThuc,
     maNhacNho
-  ) {
+  ) => {
     const sql = `
       UPDATE nhacnhouongthuoc
       SET ma_nguoi_dung = ?,ten_thuoc = ?, lieu_luong = ?, thoi_gian_nhac = ?, ngay_bat_dau = ?, ngay_ket_thuc = ?
@@ -53,7 +53,7 @@ class UongThuoc {
       maNhacNho,
     ]);
     return result;
-  }
+  };
 
   static async xoaUT(maNhacNho) {
     const sql = "DELETE FROM nhacnhouongthuoc WHERE ma_nhac_nho = ?";
