@@ -65,7 +65,6 @@ const UPDATEUT = async (req, res) => {
   } = req.body;
   if (
     !ma_nguoi_dung ||
-    !ma_nhac_nho ||
     !ten_thuoc ||
     !lieu_luong ||
     !thoi_gian_nhac ||
