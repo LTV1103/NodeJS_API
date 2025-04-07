@@ -54,7 +54,7 @@ const ADDUT = async (req, res) => {
 };
 
 const UPDATEUT = async (req, res) => {
-  const ma_nhac_nho = req.params.maNhacNho;
+  const ma_nhac_nho = req.params.ma_nhac_nho;
   const {
     ma_nguoi_dung,
     ten_thuoc,

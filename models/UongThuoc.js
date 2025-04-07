@@ -34,7 +34,7 @@ class UongThuoc {
     maNhacNho,
     tenThuoc,
     lieuLuong,
-    thoiGianNhac,
+    thoiGianNhac, 
     ngayBatDau,
     ngayKetThuc
   ) {
