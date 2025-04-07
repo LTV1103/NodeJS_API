@@ -62,8 +62,7 @@ class ChiSo {
     const sql = "delete from chisosuckhoe where ma_chi_so = ?";
     const [result] = await db.query(sql, ma);
     return result;
-  }
+  };
 }
-
 
 module.exports = ChiSo;
