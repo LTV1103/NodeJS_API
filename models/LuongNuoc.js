@@ -11,6 +11,15 @@ class LuongNuoc {
     const [result] = await db.query(sql, [maNguoiDung, ngay]);
     return result[0]?.tong_luong_nuoc || 0; // Nếu không có dữ liệu, trả về 0
   };
+  static getall = async (ma) => {
+    const sql = `
+      SELECT * 
+      FROM luongnuocuong 
+      where ma_nguoi_dung = ?
+    `;
+    const [result] = await db.query(sql,[ma]);
+    return result;
+  }
 
   // 2️⃣ Thêm lượng nước uống mới
   static addWaterRecord = async (maNguoiDung, luongML, thoiGianGhi) => {

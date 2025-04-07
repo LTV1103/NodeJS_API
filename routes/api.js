@@ -36,10 +36,11 @@ router.delete("/nhatky/:ma", NhatKyController.DELETE);
 router.get("/nhatky/chitiet/:ma", NhatKyController.DETAIL);
 
 //Uong Nuoc
-router.get("/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
-router.post("/them", LuongNuocController.ADD);
-router.put("/capnhat", LuongNuocController.UPDATE);
-router.delete("/xoa/:maLuongNuoc", LuongNuocController.DELETE);
+router.get("/uongnuoc/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
+router.get("/uongnuoc/:ma", LuongNuocController.GETALL);
+router.post("/uongnuoc/them", LuongNuocController.ADD);
+router.put("/uongnuoc/capnhat", LuongNuocController.UPDATE);
+router.delete("/uongnuoc/xoa/:maLuongNuoc", LuongNuocController.DELETE);
 
 //Ghi Chep
 router.get("/ghichep/:ma", GhiChepController.GETGCBYIDUSER);
