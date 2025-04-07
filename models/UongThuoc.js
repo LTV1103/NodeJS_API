@@ -31,12 +31,12 @@ class UongThuoc {
 
   static async suaUT(
     maNguoiDung,
-    maNhacNho,
     tenThuoc,
     lieuLuong,
-    thoiGianNhac, 
+    thoiGianNhac,
     ngayBatDau,
-    ngayKetThuc
+    ngayKetThuc,
+    maNhacNho
   ) {
     const sql = `
       UPDATE nhacnhouongthuoc
