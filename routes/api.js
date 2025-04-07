@@ -25,7 +25,7 @@ router.delete("/uongthuoc/xoa/:maNhacNho", UongThuocController.DELETEUT);
 router.get("/chiso/:ma", ChiSoController.GETCHISOBYIDUSER);
 router.get("/chiso/chitiet/:ma", ChiSoController.GETCHITIETCS);
 router.post("/chiso/:ma", ChiSoController.THEMCSBYND);
-router.put("/chiso/:ma", ChiSoController.CAPNHATCSBYND);
+router.put("/chiso/:ma", ChiSoController.UPDATEBYUSER);
 router.delete("/chiso/:ma", ChiSoController.DELETECSBYND);
 
 //Nhat Ky
