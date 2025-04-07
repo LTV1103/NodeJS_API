@@ -78,12 +78,12 @@ const UPDATEUT = async (req, res) => {
   try {
     const kq = await UongThuoc.suaUT(
       ma_nguoi_dung,
-      ma_nhac_nho,
       ten_thuoc,
       lieu_luong,
       thoi_gian_nhac,
       ngay_bat_dau,
-      ngay_ket_thuc
+      ngay_ket_thuc,
+      ma_nhac_nho
     );
     return res.status(200).json({
       status: "success",
