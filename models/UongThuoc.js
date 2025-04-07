@@ -30,6 +30,7 @@ class UongThuoc {
   }
 
   static async suaUT(
+    maNguoiDung,
     maNhacNho,
     tenThuoc,
     lieuLuong,
@@ -39,10 +40,11 @@ class UongThuoc {
   ) {
     const sql = `
       UPDATE nhacnho 
-      SET ten_thuoc = ?, lieu_luong = ?, thoi_gian_nhac = ?, ngay_bat_dau = ?, ngay_ket_thuc = ?
+      SET ma_nguoi_dung,ten_thuoc = ?, lieu_luong = ?, thoi_gian_nhac = ?, ngay_bat_dau = ?, ngay_ket_thuc = ?
       WHERE ma_nhac_nho = ?
     `;
     const [result] = await db.query(sql, [
+      maNguoiDung,
       tenThuoc,
       lieuLuong,
       thoiGianNhac,

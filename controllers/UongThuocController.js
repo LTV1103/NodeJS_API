@@ -55,26 +55,35 @@ const ADDUT = async (req, res) => {
 
 const UPDATEUT = async (req, res) => {
   const {
-    maNhacNho,
-    tenThuoc,
-    lieuLuong,
-    thoiGianNhac,
-    ngayBatDau,
-    ngayKetThuc,
+    ma_nguoi_dung,
+    ma_nhac_nho,
+    ten_thuoc,
+    lieu_luong,
+    thoi_gian_nhac,
+    ngay_bat_dau,
+    ngay_ket_thuc,
   } = req.body;
-  if (!maNhacNho || !tenThuoc || !thoiGianNhac || !ngayBatDau) {
+  if (
+    !ma_nguoi_dung ||
+    !ma_nhac_nho ||
+    !ten_thuoc ||
+    !thoi_gian_nhac ||
+    !ngay_bat_dau ||
+    !ngay_ket_thuc
+  ) {
     return res
       .status(400)
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
   try {
     const kq = await UongThuoc.suaUT(
-      maNhacNho,
-      tenThuoc,
-      lieuLuong,
-      thoiGianNhac,
-      ngayBatDau,
-      ngayKetThuc
+      ma_nguoi_dung,
+      ma_nhac_nho,
+      ten_thuoc,
+      lieu_luong,
+      thoi_gian_nhac,
+      ngay_bat_dau,
+      ngay_ket_thuc
     );
     return res.status(200).json({
       status: "success",
