@@ -1,14 +1,13 @@
 const UongThuoc = require("../models/UongThuoc");
 
-// 📌 1️⃣ Lấy danh sách nhắc nhở theo người dùng
-const getRemindersByUser = async (req, res) => {
+const GETUTBYUSER = async (req, res) => {
   const { maNguoiDung } = req.params;
   try {
-    const reminders = await UongThuoc.getRemindersByUser(maNguoiDung);
+    const kq = await UongThuoc.getUT(maNguoiDung);
     return res.status(200).json({
       status: "success",
       message: "Danh sách nhắc nhở",
-      data: reminders,
+      data: kq,
     });
   } catch (error) {
     console.error("Lỗi Server:", error);
@@ -18,8 +17,7 @@ const getRemindersByUser = async (req, res) => {
   }
 };
 
-// 📌 2️⃣ Thêm nhắc nhở mới
-const addReminder = async (req, res) => {
+const ADDUT = async (req, res) => {
   const {
     maNguoiDung,
     tenThuoc,
@@ -34,7 +32,7 @@ const addReminder = async (req, res) => {
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
   try {
-    const result = await UongThuoc.addReminder(
+    const kq = await UongThuoc.themUT(
       maNguoiDung,
       tenThuoc,
       lieuLuong,
@@ -45,7 +43,7 @@ const addReminder = async (req, res) => {
     return res.status(201).json({
       status: "success",
       message: "Thêm nhắc nhở thành công",
-      data: result,
+      data: kq,
     });
   } catch (error) {
     console.error("Lỗi Server:", error);
@@ -55,8 +53,7 @@ const addReminder = async (req, res) => {
   }
 };
 
-// 📌 3️⃣ Cập nhật nhắc nhở
-const updateReminder = async (req, res) => {
+const UPDATEUT = async (req, res) => {
   const {
     maNhacNho,
     tenThuoc,
@@ -71,7 +68,7 @@ const updateReminder = async (req, res) => {
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
   try {
-    const result = await UongThuoc.updateReminder(
+    const kq = await UongThuoc.suaUT(
       maNhacNho,
       tenThuoc,
       lieuLuong,
@@ -82,7 +79,7 @@ const updateReminder = async (req, res) => {
     return res.status(200).json({
       status: "success",
       message: "Cập nhật thành công",
-      data: result,
+      data: kq,
     });
   } catch (error) {
     console.error("Lỗi Server:", error);
@@ -92,8 +89,7 @@ const updateReminder = async (req, res) => {
   }
 };
 
-// 📌 4️⃣ Xóa nhắc nhở
-const deleteReminder = async (req, res) => {
+const DELETEUT = async (req, res) => {
   const { maNhacNho } = req.params;
   if (!maNhacNho) {
     return res
@@ -101,10 +97,10 @@ const deleteReminder = async (req, res) => {
       .json({ status: "error", message: "Thiếu mã nhắc nhở" });
   }
   try {
-    const result = await UongThuoc.deleteReminder(maNhacNho);
+    const kq = await UongThuoc.xoaUT(maNhacNho);
     return res
       .status(200)
-      .json({ status: "success", message: "Xóa thành công", data: result });
+      .json({ status: "success", message: "Xóa thành công", data: kq });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
@@ -114,8 +110,8 @@ const deleteReminder = async (req, res) => {
 };
 
 module.exports = {
-  getRemindersByUser,
-  addReminder,
-  updateReminder,
-  deleteReminder,
+  GETUTBYUSER,
+  ADDUT,
+  UPDATEUT,
+  DELETEUT,
 };

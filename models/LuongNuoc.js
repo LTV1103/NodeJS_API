@@ -39,10 +39,7 @@ class LuongNuoc {
     const [result] = await db.query(sql, [maLuongNuoc]);
     return result;
   };
-  static getall = async()=>
-  {
-    const sql = db.ge
-  }
+
 }
 
 

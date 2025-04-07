@@ -38,6 +38,32 @@ class ChiSo {
     const [result] = await db.query(sql, ma);
     return result;
   };
+  static updatechisobyid = async (
+    ma,
+    chieucao,
+    cannang,
+    huyetap,
+    nhiptim,
+    bmi
+  ) => {
+    const sql =
+      "update chisosuckhoe set chieu_cao_cm = ? , can_nang_kg = ? , huyet_ap = ? , nhip_tim = ? , BMI = ? where ma_chi_so = ? ";
+    const [result] = await db.query(sql, [
+      chieucao,
+      cannang,
+      huyetap,
+      nhiptim,
+      bmi,
+      ma,
+    ]);
+    return result;
+  };
+  static deletechisobyid = async (ma) => {
+    const sql = "delete from chisosuckhoe where ma_chi_so = ?";
+    const [result] = await db.query(sql, ma);
+    return result;
+  }
 }
+
 
 module.exports = ChiSo;

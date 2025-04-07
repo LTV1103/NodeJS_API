@@ -53,6 +53,23 @@ const THEMHOATDONG = async (req, res) => {
   }
 };
 
+const UPDATE = async (req, res) => {
+  const ma = req.params.ma;
+  const { loai_hoat_dong, thoi_gian_phut, calo_tieu_hao } = req.body;
+
+  if (!loai_hoat_dong || !thoi_gian_phut || !calo_tieu_hao) {
+    return res.status(400).json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
+  }
+
+  try {
+    const kq = await NK.capnhathoatdong(ma, loai_hoat_dong, thoi_gian_phut, calo_tieu_hao);
+    return res.status(200).json({ status: "success", message: "Cập nhật thành công", data: kq });
+  } catch (error) {
+    console.error("Lỗi Server:", error);
+    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+  }
+}
+
 const DELETE = async (req, res) => {
   const ma = req.params.ma;
 
@@ -86,4 +103,4 @@ const DETAIL = async (req, res) => {
   }
 };
 
-module.exports = { HOATDONG, THEMHOATDONG, DELETE, DETAIL };
+module.exports = { HOATDONG, THEMHOATDONG, DELETE, DETAIL, UPDATE };

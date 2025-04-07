@@ -16,19 +16,22 @@ router.delete("/nguoidung/:ma", NguoiDungController.DELETE);
 router.put("/nguoidung/:ma", NguoiDungController.UPDATE);
 
 //Uong Thuoc
-router.get("/uongthuoc/:maNguoiDung", UongThuocController.getRemindersByUser);
-router.post("/uongthuoc/them", UongThuocController.addReminder);
-router.put("/uongthuoc/capnhat", UongThuocController.updateReminder);
-router.delete("/uongthuoc/xoa/:maNhacNho", UongThuocController.deleteReminder);
+router.get("/uongthuoc/:maNguoiDung", UongThuocController.GETUTBYUSER);
+router.post("/uongthuoc/them", UongThuocController.ADDUT);
+router.put("/uongthuoc/capnhat", UongThuocController.UPDATEUT);
+router.delete("/uongthuoc/xoa/:maNhacNho", UongThuocController.DELETEUT);
 
 //Chi So
 router.get("/chiso/:ma", ChiSoController.GETCHISOBYIDUSER);
 router.get("/chiso/chitiet/:ma", ChiSoController.GETCHITIETCS);
 router.post("/chiso/:ma", ChiSoController.THEMCSBYND);
+router.put("/chiso/:ma", ChiSoController.CAPNHATCSBYND);
+router.delete("/chiso/:ma", ChiSoController.DELETECSBYND);
 
 //Nhat Ky
 router.get("/nhatky/:ma", NhatKyController.HOATDONG);
 router.post("/nhatky/:ma", NhatKyController.THEMHOATDONG);
+router.put("/nhatky/:ma", NhatKyController.CAPNHATHOATDONG);
 router.delete("/nhatky/:ma", NhatKyController.DELETE);
 router.get("/nhatky/chitiet/:ma", NhatKyController.DETAIL);
 
