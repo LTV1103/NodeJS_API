@@ -18,7 +18,7 @@ router.put("/nguoidung/:ma", NguoiDungController.UPDATE);
 //Uong Thuoc
 router.get("/uongthuoc/:maNguoiDung", UongThuocController.GETUTBYUSER);
 router.post("/uongthuoc/them", UongThuocController.ADDUT);
-router.put("/uongthuoc/capnhat", UongThuocController.UPDATEUT);
+router.put("/uongthuoc/capnhat/:ma", UongThuocController.UPDATEUT);
 router.delete("/uongthuoc/xoa/:maNhacNho", UongThuocController.DELETEUT);
 
 //Chi So
