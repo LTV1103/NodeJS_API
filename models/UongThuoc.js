@@ -39,7 +39,7 @@ class UongThuoc {
     ngayKetThuc
   ) {
     const sql = `
-      UPDATE nhacnho 
+      UPDATE nhacnhouongthuoc
       SET ma_nguoi_dung = ?,ten_thuoc = ?, lieu_luong = ?, thoi_gian_nhac = ?, ngay_bat_dau = ?, ngay_ket_thuc = ?
       WHERE ma_nhac_nho = ?
     `;
@@ -54,9 +54,9 @@ class UongThuoc {
     ]);
     return result;
   }
-  
+
   static async xoaUT(maNhacNho) {
-    const sql = "DELETE FROM nhacnho WHERE ma_nhac_nho = ?";
+    const sql = "DELETE FROM nhacnhouongthuoc WHERE ma_nhac_nho = ?";
     const [result] = await db.query(sql, [maNhacNho]);
     return result;
   }
