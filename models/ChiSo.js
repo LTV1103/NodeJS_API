@@ -30,7 +30,7 @@ class ChiSo {
   };
   static getchiso = async (ma) => {
     const sql =
-      "select ho_ten,gioi_tinh,chieu_cao_cm,can_nang_kg,huyet_ap,nhip_tim,BMI,ngay_do from chisosuckhoe join nguoidung on chisosuckhoe.ma_nguoi_dung = nguoidung.ma_nguoi_dung where ma_nguoi_dung = ? ";
+      "select ho_ten,gioi_tinh,chieu_cao_cm,can_nang_kg,huyet_ap,nhip_tim,BMI,ngay_do from chisosuckhoe join nguoidung on chisosuckhoe.ma_nguoi_dung = nguoidung.ma_nguoi_dung where chisosuckhoe.ma_nguoi_dung = ? ";
     const [result] = await db.query(sql, ma);
     return result;
   };
