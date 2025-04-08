@@ -36,7 +36,6 @@ const THEMCSBYND = async (req, res) => {
   }
 };
 
-
 const GETCHISOBYIDUSER = async (req, res) => {
   const ma = req.params.ma;
   try {
@@ -114,12 +113,12 @@ const UPDATEBYUSER = async (req, res) => {
     }
     const bmi = can_nang / ((chieu_cao / 100) * (chieu_cao / 100));
     const kq = await CS.updatechisobyid(
-      ma,
       chieu_cao,
       can_nang,
       huyet_ap,
       nhip_tim,
-      bmi
+      bmi,
+      ma
     );
     return res.status(200).json({
       status: "success",
@@ -139,7 +138,7 @@ const DELETE = async (req, res) => {
         .status(400)
         .json({ status: "error", message: "Thiếu mã người dùng" });
     }
-    const kq = await CS.deletechisobynguoidung(ma);
+    const kq = await CS.deletechisobyid(ma);
     if (kq.affectedRows === 0) {
       return res
         .status(404)
@@ -155,5 +154,10 @@ const DELETE = async (req, res) => {
   }
 };
 
-
-module.exports = { THEMCSBYND, GETCHISOBYIDUSER, GETCHITIETCS, UPDATEBYUSER, DELETE };
+module.exports = {
+  THEMCSBYND,
+  GETCHISOBYIDUSER,
+  GETCHITIETCS,
+  UPDATEBYUSER,
+  DELETE,
+};
