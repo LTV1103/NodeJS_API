@@ -82,5 +82,7 @@ class NguoiDung {
 
     return { id: user.ma_nguoi_dung, email: user.email };
   };
+  
+
 }
 module.exports = NguoiDung;
