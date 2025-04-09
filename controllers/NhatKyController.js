@@ -5,10 +5,14 @@ const HOATDONG = async (req, res) => {
   const ma = req.params.ma;
   try {
     const kq = await NK.hoatdong(ma);
-    return res.status(200).json({ status: "success", message: "Thông tin hoạt động", data: kq });
+    return res
+      .status(200)
+      .json({ status: "success", message: "Thông tin hoạt động", data: kq });
   } catch (error) {
     console.error("Lỗi Server:", error);
-    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
 
@@ -18,74 +22,139 @@ const THEMHOATDONG = async (req, res) => {
   const [canNangResult] = await db.query(sql, ma);
   const canNang = canNangResult[0].can_nang_kg;
   const { loai_hoat_dong, ngay_hoat_dong, thoi_gian_phut } = req.body;
-  
+
   if (!loai_hoat_dong || !ngay_hoat_dong || !thoi_gian_phut) {
-    return res.status(400).json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
 
   try {
     const check = "select ma_nguoi_dung from nguoidung where ma_nguoi_dung = ?";
     const [checkuser] = await db.query(check, ma);
     if (checkuser.length == 0) {
-      return res.status(404).json({ status: "error", message: "Không tìm thấy người dùng" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy người dùng" });
     }
 
     const MET_VALUES = {
       "Chạy bộ": 9.8,
       "Đạp xe": 7.5,
-      "Gym": 6.0,
+      Gym: 6.0,
       "Nhảy Dây": 12.0,
-      "Bơi": 8.0,
+      Bơi: 8.0,
     };
 
     if (!MET_VALUES[loai_hoat_dong]) {
-      return res.status(400).json({ status: "error", message: "Loại hoạt động không hợp lệ" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Loại hoạt động không hợp lệ" });
     }
 
     const MET = MET_VALUES[loai_hoat_dong];
     const calo_tieu_hao = (MET * canNang * thoi_gian_phut) / 60;
-    const kq = await NK.themhoatdong(ma, loai_hoat_dong, thoi_gian_phut, calo_tieu_hao, ngay_hoat_dong);
+    const kq = await NK.themhoatdong(
+      ma,
+      loai_hoat_dong,
+      thoi_gian_phut,
+      calo_tieu_hao,
+      ngay_hoat_dong
+    );
 
-    return res.status(201).json({ status: "success", message: "Thêm thành công", data: kq });
+    return res
+      .status(201)
+      .json({ status: "success", message: "Thêm thành công", data: kq });
   } catch (error) {
     console.error("Lỗi Server:", error);
-    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
 
 const UPDATE = async (req, res) => {
   const ma = req.params.ma;
-  const { loai_hoat_dong, thoi_gian_phut, calo_tieu_hao } = req.body;
+  const { loai_hoat_dong, thoi_gian_phut } = req.body;
 
-  if (!loai_hoat_dong || !thoi_gian_phut || !calo_tieu_hao) {
-    return res.status(400).json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
+  if (!loai_hoat_dong || !thoi_gian_phut) {
+    return res
+      .status(400)
+      .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
 
   try {
-    const kq = await NK.capnhathoatdong(ma, loai_hoat_dong, thoi_gian_phut, calo_tieu_hao);
-    return res.status(200).json({ status: "success", message: "Cập nhật thành công", data: kq });
+    // Lấy cân nặng người dùng từ bảng chisosuckhoe
+    const sql = "SELECT can_nang_kg FROM chisosuckhoe WHERE ma_nguoi_dung = ?";
+    const [canNangResult] = await db.query(sql, ma);
+
+    if (canNangResult.length === 0) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy chỉ số sức khỏe" });
+    }
+
+    const canNang = canNangResult[0].can_nang_kg;
+
+    // MET tương ứng với từng loại hoạt động
+    const MET_VALUES = {
+      "Chạy bộ": 9.8,
+      "Đạp xe": 7.5,
+      Gym: 6.0,
+      "Nhảy Dây": 12.0,
+      Bơi: 8.0,
+    };
+
+    if (!MET_VALUES[loai_hoat_dong]) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Loại hoạt động không hợp lệ" });
+    }
+
+    const MET = MET_VALUES[loai_hoat_dong];
+    const calo_tieu_hao = (MET * canNang * thoi_gian_phut) / 60;
+
+    const kq = await NK.capnhathoatdong(
+      ma,
+      loai_hoat_dong,
+      thoi_gian_phut,
+      calo_tieu_hao
+    );
+    return res
+      .status(200)
+      .json({ status: "success", message: "Cập nhật thành công", data: kq });
   } catch (error) {
     console.error("Lỗi Server:", error);
-    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
-}
+};
 
 const DELETE = async (req, res) => {
   const ma = req.params.ma;
 
   try {
     if (!ma) {
-      return res.status(400).json({ status: "error", message: "Vui lòng nhập mã" });
+      return res
+        .status(400)
+        .json({ status: "error", message: "Vui lòng nhập mã" });
     }
     const kq = await NK.xoahoatdong(ma);
 
     if (kq.affectedRows === 0) {
-      return res.status(404).json({ status: "error", message: "Không tìm thấy mã" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy mã" });
     }
-    return res.status(200).json({ status: "success", message: "Xóa thành công" });
+    return res
+      .status(200)
+      .json({ status: "success", message: "Xóa thành công" });
   } catch (error) {
     console.error("Lỗi Server:", error);
-    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
 
@@ -94,12 +163,18 @@ const DETAIL = async (req, res) => {
   try {
     const kq = await NK.chitiet(ma);
     if (kq.length == 0) {
-      return res.status(404).json({ status: "error", message: "Không tìm thấy thông tin" });
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy thông tin" });
     }
-    return res.status(200).json({ status: "success", message: "Thông tin chi tiết", data: kq });
+    return res
+      .status(200)
+      .json({ status: "success", message: "Thông tin chi tiết", data: kq });
   } catch (error) {
     console.error("Lỗi Server:", error);
-    return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
 
