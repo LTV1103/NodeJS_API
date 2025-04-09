@@ -24,7 +24,7 @@ class NhatKy {
     return result;
   };
 
-  static capnhathoatdong = async (ma, loaihoatdong, thoigian, calotieuhao) => {
+  static capnhathoatdong = async (loaihoatdong, thoigian, calotieuhao,ma) => {
     const sql =
       "update nhatkyhoatdong set loai_hoat_dong = ?, thoi_gian_phut = ?, calo_tieu_hao = ? where ma_hoat_dong = ?";
     const [result] = await db.query(sql, [
