@@ -39,7 +39,7 @@ router.get("/nhatky/chitiet/:ma", NhatKyController.DETAIL);
 
 //Uong Nuoc
 router.get("/uongnuoc/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
-router.get("/uongnuoc/:ma", LuongNuocController.GETALL);
+router.get("/uongnuoc/:ma_nhac_nho", LuongNuocController.GETALL);
 router.post("/uongnuoc/them", LuongNuocController.ADD);
 router.put("/uongnuoc/capnhat", LuongNuocController.UPDATE);
 router.delete("/uongnuoc/xoa/:maLuongNuoc", LuongNuocController.DELETE);
