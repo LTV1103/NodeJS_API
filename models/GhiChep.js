@@ -5,13 +5,14 @@ class GhiChep {
     const [result] = await db.query(sql, ma);
     return result;
   };
-  static themgc = async (ma_nguoi_dung, thoi_gian_bat_dau, thoi_gian_ket_thuc) => {
+  static themgc = async (ma_nguoi_dung, thoi_gian_bat_dau, thoi_gian_ket_thuc,chat_luong_giac_ngu) => {
     const sql =
-      "insert into ghichepgiacngu(ma_nguoi_dung,thoi_gian_bat_dau,thoi_gian_ket_thuc) values(?,?,?)";
+      "insert into ghichepgiacngu(ma_nguoi_dung,thoi_gian_bat_dau,thoi_gian_ket_thuc,chat_luong_giac_ngu) values(?,?,?,?)";
     const [result] = await db.query(sql, [
       ma_nguoi_dung,
       thoi_gian_bat_dau,
       thoi_gian_ket_thuc,
+      chat_luong_giac_ngu,
     ]);
     return result;
   };
