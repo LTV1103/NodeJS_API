@@ -29,6 +29,7 @@ const ADDUT = async (req, res) => {
   if (
     !maNguoiDung ||
     !tenThuoc ||
+    !lieuLuong||
     !thoiGianNhac ||
     !ngayBatDau ||
     !ngayKetThuc
