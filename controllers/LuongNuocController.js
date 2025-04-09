@@ -110,7 +110,7 @@ const DELETE = async (req, res) => {
 const GETALL = async (req, res) => {
   const { ma_nguoi_dung } = req.params;
   try {
-    const result = await LN.getAll(ma_nguoi_dung);
+    const result = await LN.getall(ma_nguoi_dung);
     return res.status(200).json({
       status: "success",
       message: "Danh sách lượng nước",
