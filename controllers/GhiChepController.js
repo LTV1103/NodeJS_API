@@ -30,11 +30,7 @@ const THEMGC = async (req, res) => {
   }
 
   try {
-    // Thêm bản ghi giấc ngủ
-
-
     // Lấy mã ghi chép vừa thêm
-    const ma_ghi_chep = kq.insertId;
 
     // Kiểm tra thời lượng giấc ngủ từ bản ghi mới
     const [result] = await GC.checktime(ma_ghi_chep);
