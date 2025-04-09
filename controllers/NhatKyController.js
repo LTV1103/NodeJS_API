@@ -76,27 +76,16 @@ const THEMHOATDONG = async (req, res) => {
 
 const UPDATE = async (req, res) => {
   const ma = req.params.ma;
-  const { loai_hoat_dong, thoi_gian_phut } = req.body;
+  const { loai_hoat_dong, thoi_gian_phut ,ma_nguoi_dung} = req.body;
 
-  if (!loai_hoat_dong || !thoi_gian_phut) {
+  if (!loai_hoat_dong || !thoi_gian_phut || !ma_nguoi_dung) {
     return res
       .status(400)
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
 
   try {
-    
-    const [canNangResult] = await CS.getcannang(ma);
-
-    if (canNangResult.length === 0) {
-      return res
-        .status(404)
-        .json({ status: "error", message: "Không tìm thấy chỉ số sức khỏe" });
-    }
-
-    const canNang = canNangResult[0].can_nang_kg;
-
-    // MET tương ứng với từng loại hoạt động
+    const canNang = await CS.getcannang(ma_nguoi_dung);
     const MET_VALUES = {
       "Chạy bộ": 9.8,
       "Đạp xe": 7.5,
@@ -118,9 +107,9 @@ const UPDATE = async (req, res) => {
       loai_hoat_dong,
       thoi_gian_phut,
       calo_tieu_hao,
-      ma,
-
+      ma
     );
+
     return res
       .status(200)
       .json({ status: "success", message: "Cập nhật thành công", data: kq });
@@ -131,6 +120,7 @@ const UPDATE = async (req, res) => {
       .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
+
 
 const DELETE = async (req, res) => {
   const ma = req.params.ma;
