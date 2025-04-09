@@ -23,7 +23,7 @@ router.delete("/uongthuoc/:maNhacNho", UongThuocController.DELETEUT);
 
 //Chi So
 router.get("/chiso/:ma", ChiSoController.GETCHISOBYIDUSER);
-router.get("/chiso/canang/:ma", ChiSoController.GETTOTALCS);
+router.get("/chiso/canang/:ma", ChiSoController.GETCANNANG);
 router.get("/chiso/chitiet/:ma", ChiSoController.GETCHITIETCS);
 router.post("/chiso/:ma", ChiSoController.THEMCSBYND);
 router.put("/chiso/:ma", ChiSoController.UPDATEBYUSER);
