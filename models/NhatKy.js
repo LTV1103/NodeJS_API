@@ -28,27 +28,24 @@ class NhatKy {
     const sql =
       "update nhatkyhoatdong set loai_hoat_dong = ?, thoi_gian_phut = ?, calo_tieu_hao = ? where ma_hoat_dong = ?";
     const [result] = await db.query(sql, [
-      ma,
       loaihoatdong,
       thoigian,
-      calotieuhao
+      calotieuhao,
+      ma,
     ]);
     return result;
-  }
+  };
 
-  static xoahoatdong = async(ma)=>
-  {
-    const sql = 'delete from nhatkyhoatdong where ma_hoat_dong = ?';
-    const  [result] = await db.query(sql,ma);
+  static xoahoatdong = async (ma) => {
+    const sql = "delete from nhatkyhoatdong where ma_hoat_dong = ?";
+    const [result] = await db.query(sql, ma);
     return result;
-
-  }
-  static chitiet = async(ma)=>{
+  };
+  static chitiet = async (ma) => {
     const sql = "select * from nhatkyhoatdong where ma_hoat_dong = ?";
-    const[result] = await db.query(sql,ma);
-    return result
-  }
+    const [result] = await db.query(sql, ma);
+    return result;
+  };
 }
-
 
 module.exports = NhatKy;

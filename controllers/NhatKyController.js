@@ -115,10 +115,11 @@ const UPDATE = async (req, res) => {
     const calo_tieu_hao = (MET * canNang * thoi_gian_phut) / 60;
 
     const kq = await NK.capnhathoatdong(
-      ma,
       loai_hoat_dong,
       thoi_gian_phut,
-      calo_tieu_hao
+      calo_tieu_hao,
+      ma,
+
     );
     return res
       .status(200)
