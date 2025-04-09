@@ -19,20 +19,20 @@ const GETUTBYUSER = async (req, res) => {
 
 const ADDUT = async (req, res) => {
   const {
-    maNguoiDung,
-    tenThuoc,
-    lieuLuong,
-    thoiGianNhac,
-    ngayBatDau,
-    ngayKetThuc,
+    ma_nguoi_dung,
+    ten_thuoc,
+    lieu_luong,
+    thoi_gian_nhac,
+    ngay_bat_dau,
+    ngay_ket_thuc,
   } = req.body;
   if (
-    !maNguoiDung ||
-    !tenThuoc ||
-    !lieuLuong||
-    !thoiGianNhac ||
-    !ngayBatDau ||
-    !ngayKetThuc
+    !ma_nguoi_dung ||
+    !ten_thuoc ||
+    !lieu_luong ||
+    !thoi_gian_nhac ||
+    !ngay_bat_dau ||
+    !ngay_ket_thuc
   ) {
     return res
       .status(400)
@@ -40,12 +40,12 @@ const ADDUT = async (req, res) => {
   }
   try {
     const kq = await UongThuoc.themUT(
-      maNguoiDung,
-      tenThuoc,
-      lieuLuong,
-      thoiGianNhac,
-      ngayBatDau,
-      ngayKetThuc
+      ma_nguoi_dung,
+      ten_thuoc,
+      lieu_luong,
+      thoi_gian_nhac,
+      ngay_bat_dau,
+      ngay_ket_thuc
     );
     return res.status(201).json({
       status: "success",
@@ -68,7 +68,7 @@ const UPDATEUT = async (req, res) => {
     lieu_luong,
     thoi_gian_nhac,
     ngay_bat_dau,
-    ngay_ket_thuc
+    ngay_ket_thuc,
   } = req.body;
   if (
     !ma_nguoi_dung ||
