@@ -144,7 +144,7 @@ const DELETE = async (req, res) => {
         .status(404)
         .json({ status: "error", message: "Không tìm thấy chỉ số sức khỏe" });
     }
-    return res.status(204).json({
+    return res.status(200).json({
       status: "success",
       message: "Xóa chỉ số sức khỏe thành công",
     });
