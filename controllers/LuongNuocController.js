@@ -108,9 +108,9 @@ const DELETE = async (req, res) => {
 
 // Lấy tất cả lượng nước theo người dùng
 const GETALL = async (req, res) => {
-  const { ma_nguoi_dung } = req.params;
+  const ma = req.params.ma;
   try {
-    const result = await LN.getall(ma_nguoi_dung);
+    const result = await LN.getall(ma);
     return res.status(200).json({
       status: "success",
       message: "Danh sách lượng nước",
