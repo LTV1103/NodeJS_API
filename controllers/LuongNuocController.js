@@ -17,14 +17,14 @@ const GETTOTAL = async (req, res) => {
 };
 
 const ADD = async (req, res) => {
-  const { maNguoiDung, luongML, thoiGianGhi } = req.body;
-  if (!maNguoiDung || !luongML || !thoiGianGhi) {
+  const { ma_nguoi_dung, luong_ml, thoi_gian_ghi } = req.body;
+  if (!ma_nguoi_dung || !luong_ml || !thoi_gian_ghi) {
     return res
       .status(400)
       .json({ status: "error", message: "Thiếu dữ liệu đầu vào" });
   }
   try {
-    const result = await LN.addWaterRecord(maNguoiDung, luongML, thoiGianGhi);
+    const result = await LN.addWaterRecord(ma_nguoi_dung, luong_ml, thoi_gian_ghi);
     return res.status(201).json({
       status: "success",
       message: "Thêm lượng nước thành công",
