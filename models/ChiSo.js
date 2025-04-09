@@ -64,6 +64,12 @@ class ChiSo {
     const [result] = await db.query(sql, ma);
     return result;
   };
+  static getcannang = async (ma) => {
+    const sql = "select can_nang_kg from chisosuckhoe where ma_nguoi_dung = ?";
+    const [result] = await db.query(sql, ma);
+    return result;
+  };
 }
+
 
 module.exports = ChiSo;

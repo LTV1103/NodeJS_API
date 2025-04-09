@@ -153,6 +153,30 @@ const DELETE = async (req, res) => {
     return res.status(500).json({ status: "error", message: "Lỗi Server" });
   }
 };
+const GETCANNANG = async (req, res) => {
+  const ma = req.params.ma;
+  try {
+    if (!ma) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Thiếu mã người dùng" });
+    }
+    const kq = await CS.getcannang(ma);
+    if (kq.length === 0) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Không tìm thấy chỉ số sức khỏe" });
+    }
+    return res.status(200).json({
+      status: "success",
+      message: "Thông tin chỉ số",
+      data: kq,
+    });
+  } catch (error) {
+    console.error("Lỗi Server:", error);
+    return res.status(500).json({ status: "error", message: "Lỗi Server" });
+  }
+}
 
 module.exports = {
   THEMCSBYND,
@@ -160,4 +184,5 @@ module.exports = {
   GETCHITIETCS,
   UPDATEBYUSER,
   DELETE,
+  GETCANNANG
 };
