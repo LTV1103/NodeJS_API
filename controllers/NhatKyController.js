@@ -1,5 +1,6 @@
 const NK = require("../models/NhatKy");
 const db = require("../config/db");
+const CS = require("../models/ChiSo");
 
 const HOATDONG = async (req, res) => {
   const ma = req.params.ma;
@@ -84,9 +85,8 @@ const UPDATE = async (req, res) => {
   }
 
   try {
-    // Lấy cân nặng người dùng từ bảng chisosuckhoe
-    const sql = "SELECT can_nang_kg FROM chisosuckhoe WHERE ma_nguoi_dung = ?";
-    const [canNangResult] = await db.query(sql, ma);
+    
+    const [canNangResult] = await CS.getcannang(ma);
 
     if (canNangResult.length === 0) {
       return res

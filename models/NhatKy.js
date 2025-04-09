@@ -41,11 +41,6 @@ class NhatKy {
     const [result] = await db.query(sql, ma);
     return result;
   };
-  static chitiet = async (ma) => {
-    const sql = "select * from nhatkyhoatdong where ma_hoat_dong = ?";
-    const [result] = await db.query(sql, ma);
-    return result;
-  };
 }
 
 module.exports = NhatKy;
