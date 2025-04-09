@@ -68,7 +68,7 @@ const UPDATEUT = async (req, res) => {
     lieu_luong,
     thoi_gian_nhac,
     ngay_bat_dau,
-    ngay_ket_thuc,
+    ngay_ket_thuc
   } = req.body;
   if (
     !ma_nguoi_dung ||
