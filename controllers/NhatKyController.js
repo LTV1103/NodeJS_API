@@ -76,7 +76,7 @@ const THEMHOATDONG = async (req, res) => {
 
 const UPDATE = async (req, res) => {
   const ma = req.params.ma;
-  const { loai_hoat_dong, thoi_gian_phut ,ma_nguoi_dung} = req.body;
+  const { loai_hoat_dong, thoi_gian_phut, ma_nguoi_dung } = req.body;
 
   if (!loai_hoat_dong || !thoi_gian_phut || !ma_nguoi_dung) {
     return res
@@ -85,7 +85,24 @@ const UPDATE = async (req, res) => {
   }
 
   try {
-    const canNang = await CS.getcannang(ma_nguoi_dung);
+    const [canNangResult] = await CS.getcannang(ma_nguoi_dung);
+
+    if (!canNangResult || !canNangResult.can_nang_kg) {
+      return res.status(404).json({
+        status: "error",
+        message: "Không tìm thấy chỉ số cân nặng hợp lệ",
+      });
+    }
+
+    const canNang = parseFloat(canNangResult.can_nang_kg);
+
+    if (isNaN(canNang) || canNang <= 0) {
+      return res.status(400).json({
+        status: "error",
+        message: "Giá trị cân nặng không hợp lệ",
+      });
+    }
+
     const MET_VALUES = {
       "Chạy bộ": 9.8,
       "Đạp xe": 7.5,
@@ -94,25 +111,34 @@ const UPDATE = async (req, res) => {
       Bơi: 8.0,
     };
 
-    if (!MET_VALUES[loai_hoat_dong]) {
+    const MET = MET_VALUES[loai_hoat_dong];
+    if (!MET) {
       return res
         .status(400)
         .json({ status: "error", message: "Loại hoạt động không hợp lệ" });
     }
 
-    const MET = MET_VALUES[loai_hoat_dong];
-    const calo_tieu_hao = (MET * canNang * thoi_gian_phut) / 60;
+    const thoiGian = parseInt(thoi_gian_phut);
+    if (isNaN(thoiGian) || thoiGian <= 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Thời gian không hợp lệ" });
+    }
+
+    const calo_tieu_hao = (MET * canNang * thoiGian) / 60;
 
     const kq = await NK.capnhathoatdong(
       loai_hoat_dong,
-      thoi_gian_phut,
+      thoiGian,
       calo_tieu_hao,
       ma
     );
 
-    return res
-      .status(200)
-      .json({ status: "success", message: "Cập nhật thành công", data: kq });
+    return res.status(200).json({
+      status: "success",
+      message: "Cập nhật thành công",
+      data: kq,
+    });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res
@@ -120,7 +146,6 @@ const UPDATE = async (req, res) => {
       .json({ status: "error", message: "Lỗi Server", error: error.message });
   }
 };
-
 
 const DELETE = async (req, res) => {
   const ma = req.params.ma;
