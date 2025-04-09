@@ -18,7 +18,7 @@ router.put("/nguoidung/:ma", NguoiDungController.UPDATE);
 //Uong Thuoc
 router.get("/uongthuoc/:maNguoiDung", UongThuocController.GETUTBYUSER);
 router.post("/uongthuoc", UongThuocController.ADDUT);
-router.put("/uongthuoc/:ma", UongThuocController.UPDATEUT);
+router.put("/uongthuoc/:ma_nhac_nho", UongThuocController.UPDATEUT);
 router.delete("/uongthuoc/:maNhacNho", UongThuocController.DELETEUT);
 
 //Chi So
@@ -39,7 +39,7 @@ router.get("/nhatky/chitiet/:ma", NhatKyController.DETAIL);
 
 //Uong Nuoc
 router.get("/uongnuoc/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
-router.get("/uongnuoc/:ma_nhac_nho", LuongNuocController.GETALL);
+router.get("/uongnuoc/:ma", LuongNuocController.GETALL);
 router.post("/uongnuoc/them", LuongNuocController.ADD);
 router.put("/uongnuoc/capnhat", LuongNuocController.UPDATE);
 router.delete("/uongnuoc/xoa/:maLuongNuoc", LuongNuocController.DELETE);
