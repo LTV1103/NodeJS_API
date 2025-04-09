@@ -82,7 +82,7 @@ const DELETE = async (req, res) => {
     if (kq.affectedRows === 0) {
       return res.status(404).json({ status: "error", message: "Không tìm thấy mã" });
     }
-    return res.status(204).json({ status: "success", message: "Xóa thành công" });
+    return res.status(200).json({ status: "success", message: "Xóa thành công" });
   } catch (error) {
     console.error("Lỗi Server:", error);
     return res.status(500).json({ status: "error", message: "Lỗi Server", error: error.message });
