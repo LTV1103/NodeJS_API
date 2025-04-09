@@ -26,9 +26,9 @@ class NhatKy {
 
   static capnhathoatdong = async (
     loaihoatdong,
+    ngayhoatdong,
     thoigian,
     calotieuhao,
-    ngayhoatdong,
     ma
   ) => {
     const sql =
