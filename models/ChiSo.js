@@ -40,12 +40,12 @@ class ChiSo {
     return result;
   };
   static updatechisobyid = async (
-    ma,
     chieucao,
     cannang,
     huyetap,
     nhiptim,
-    bmi
+    bmi,
+    ma
   ) => {
     const sql =
       "update chisosuckhoe set chieu_cao_cm = ? , can_nang_kg = ? , huyet_ap = ? , nhip_tim = ? , BMI = ? where ma_chi_so = ? ";
