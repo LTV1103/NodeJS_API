@@ -42,7 +42,7 @@ router.get("/uongnuoc/tong/:ma/:ngay", LuongNuocController.GETTOTAL);
 router.get("/uongnuoc/:ma", LuongNuocController.GETALL);
 router.post("/uongnuoc/them", LuongNuocController.ADD);
 router.put("/uongnuoc/capnhat", LuongNuocController.UPDATE);
-router.delete("/uongnuoc/xoa/:maLuongNuoc", LuongNuocController.DELETE);
+router.delete("/uongnuoc/xoa/:ma", LuongNuocController.DELETE);
 
 //Ghi Chep
 router.get("/ghichep/:ma", GhiChepController.GETGCBYIDUSER);

@@ -82,7 +82,7 @@ const UPDATE = async (req, res) => {
 
 // Xoá lượng nước
 const DELETE = async (req, res) => {
-  const { ma_luong_nuoc } = req.params;
+  const ma = req.params.ma;
   if (!ma_luong_nuoc) {
     return res.status(400).json({
       status: "error",
@@ -90,7 +90,7 @@ const DELETE = async (req, res) => {
     });
   }
   try {
-    const result = await LN.deleteWaterRecord(ma_luong_nuoc);
+    const result = await LN.deleteWaterRecord(ma);
     return res.status(200).json({
       status: "success",
       message: "Xóa thành công",
