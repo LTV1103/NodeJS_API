@@ -76,7 +76,8 @@ const THEMHOATDONG = async (req, res) => {
 
 const UPDATE = async (req, res) => {
   const ma = req.params.ma;
-  const { loai_hoat_dong, thoi_gian_phut, ma_nguoi_dung } = req.body;
+  const { loai_hoat_dong, ngay_hoat_dong, thoi_gian_phut, ma_nguoi_dung } =
+    req.body;
 
   if (!loai_hoat_dong || !thoi_gian_phut || !ma_nguoi_dung) {
     return res
@@ -129,6 +130,7 @@ const UPDATE = async (req, res) => {
 
     const kq = await NK.capnhathoatdong(
       loai_hoat_dong,
+      ngay_hoat_dong,
       thoiGian,
       calo_tieu_hao,
       ma
