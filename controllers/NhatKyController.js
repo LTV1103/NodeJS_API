@@ -77,7 +77,7 @@ const DELETE = async (req, res) => {
     if (!ma) {
       return res.status(400).json({ status: "error", message: "Vui lòng nhập mã" });
     }
-    const kq = await NK.delete(ma);
+    const kq = await NK.xoahoatdong(ma);
 
     if (kq.affectedRows === 0) {
       return res.status(404).json({ status: "error", message: "Không tìm thấy mã" });
