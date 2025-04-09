@@ -83,7 +83,7 @@ const UPDATE = async (req, res) => {
 // Xoá lượng nước
 const DELETE = async (req, res) => {
   const ma = req.params.ma;
-  if (!ma_luong_nuoc) {
+  if (!ma) {
     return res.status(400).json({
       status: "error",
       message: "Thiếu mã lượng nước",
